@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "What is the main purpose of data preprocessing in machine learning?",
+      "answers": {
+        "a": "To increase dataset size",
+        "b": "To improve data quality and consistency",
+        "c": "To reduce computation speed",
+        "d": "To remove all features"
+      },
+      "explanations": {
+        "a": "Data preprocessing focuses on cleaning and preparing data, not on increasing the number of data samples.",
+        "b": "Preprocessing removes noise, handles missing values, and ensures consistency so the data can be effectively used by machine learning models.",
+        "c": "Controlling computation speed is not the primary objective of data preprocessing.",
+        "d": "Removing all features would eliminate useful information and prevent model training."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which of the following problems is commonly addressed during data preprocessing?",
+      "answers": {
+        "a": "Overfitting",
+        "b": "Model deployment",
+        "c": "Missing values",
+        "d": "Hyperparameter tuning"
+      },
+      "explanations": {
+        "a": "Overfitting is mainly handled during model training and validation, not during data preprocessing.",
+        "b": "Model deployment is a post-training activity and not part of data preprocessing.",
+        "c": "Handling missing values is a key preprocessing task to ensure data completeness and reliability.",
+        "d": "Hyperparameter tuning is performed during model optimization, not during data preprocessing."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Handling missing values in a dataset helps to:",
+      "answers": {
+        "a": "Increase noise in data",
+        "b": "Prevent errors during model training",
+        "c": "Reduce number of records",
+        "d": "Change target labels"
+      },
+      "explanations": {
+        "a": "Handling missing values reduces noise and improves data quality rather than increasing it.",
+        "b": "Properly handling missing values avoids algorithm failures and ensures smooth model training.",
+        "c": "The goal is usually to retain data through imputation rather than reducing the dataset size.",
+        "d": "Handling missing values does not alter the actual target labels in the dataset."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Normalization is mainly applied to:",
+      "answers": {
+        "a": "Categorical attributes",
+        "b": "Target variables",
+        "c": "Numerical attributes",
+        "d": "Class labels"
+      },
+      "explanations": {
+        "a": "Normalization requires numerical values and cannot be directly applied to categorical data.",
+        "b": "Target variables are generally not normalized unless required for a specific regression task.",
+        "c": "Normalization scales numerical features to a common range, improving model performance.",
+        "d": "Class labels represent categories and are not suitable for normalization."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Why is normalization important in machine learning?",
+      "answers": {
+        "a": "It converts text into numbers",
+        "b": "It removes duplicate values",
+        "c": "It brings features to a common scale",
+        "d": "It increases dataset size"
+      },
+      "explanations": {
+        "a": "Converting text into numbers is part of encoding, not normalization.",
+        "b": "Removing duplicates is a data cleaning step, not the purpose of normalization.",
+        "c": "Normalization ensures all numerical features are on the same scale so no feature dominates the model.",
+        "d": "Normalization only rescales existing data and does not increase the number of samples."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Encoding is a technique used to:",
+      "answers": {
+        "a": "Reduce dimensionality",
+        "b": "Handle missing data",
+        "c": "Convert categorical data into numerical form",
+        "d": "Remove outliers"
+      },
+      "explanations": {
+        "a": "Dimensionality reduction is achieved using techniques like PCA, not encoding.",
+        "b": "Handling missing data is a separate preprocessing step, not the purpose of encoding.",
+        "c": "Encoding transforms categorical variables into numerical values that machine learning algorithms can process.",
+        "d": "Outlier removal is a data cleaning task and not related to encoding."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which of the following is an example of a categorical variable?",
+      "answers": {
+        "a": "Age",
+        "b": "Salary",
+        "c": "Gender",
+        "d": "Height"
+      },
+      "explanations": {
+        "a": "Age is a numerical variable that represents measurable quantity.",
+        "b": "Salary is a numerical variable expressed in continuous values.",
+        "c": "Gender represents categories or labels rather than numerical measurements.",
+        "d": "Height is a numerical variable measured on a continuous scale."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Feature engineering mainly focuses on:",
+      "answers": {
+        "a": "Collecting raw data",
+        "b": "Creating and transforming features",
+        "c": "Removing datasets",
+        "d": "Deploying models"
+      },
+      "explanations": {
+        "a": "Collecting raw data is part of data acquisition, not feature engineering.",
+        "b": "Feature engineering involves creating new features and transforming existing ones to improve model performance.",
+        "c": "Removing entire datasets is not related to feature engineering.",
+        "d": "Model deployment is a post-training step and not part of feature engineering."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Data visualization is used to:",
+      "answers": {
+        "a": "Train machine learning models",
+        "b": "Encode categorical data",
+        "c": "Understand patterns and relationships in data",
+        "d": "Reduce memory usage"
+      },
+      "explanations": {
+        "a": "Model training is carried out using algorithms, not through data visualization.",
+        "b": "Encoding is a preprocessing technique and is not performed using visualization.",
+        "c": "Data visualization helps in identifying trends, patterns, and relationships within the dataset.",
+        "d": "Data visualization does not affect memory usage; it is used for analysis and interpretation."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which step is performed first in a typical machine learning pipeline?",
+      "answers": {
+        "a": "Model evaluation",
+        "b": "Model training",
+        "c": "Data preprocessing",
+        "d": "Prediction"
+      },
+      "explanations": {
+        "a": "Model evaluation is performed after training to assess model performance.",
+        "b": "Model training requires prepared data and therefore cannot be the first step.",
+        "c": "Data preprocessing is performed first to clean and prepare data before training the model.",
+        "d": "Prediction is done after the model has been trained and evaluated."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    }
+  ]
+}

@@ -23,6 +23,6 @@ SrNo | Name | Faculty or Student | Department| Institute | Email id
 1 | Dr. A. Charan Kumari | Faculty | Electrical Engineering | Dayalbagh Educational Institute | charankumari@dei.ac.in
 2 | Dr. K. Srinivas | Faculty | Electrical Engineering | Dayalbagh Educational Institute | ksrinivas@dei.ac.in
 3 | Amoli Satsangi | Student | Electrical Engineering | Dayalbagh Educational Institute | amolisatsangi6@gmail.com
-4| Sumir Singh | Electrical Engineering | Dayalbagh Educational Institute | sumirsingh19@gmail.com
+4 | Sumir Singh | Student | Electrical Engineering | Dayalbagh Educational Institute | sumirsingh19@gmail.com
 
 
