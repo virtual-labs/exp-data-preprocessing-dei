@@ -20,9 +20,9 @@ Min-max normalization preserves the relationships among the original data values
 
 ### 3. Categorical Encoding
 Many real-world datasets contain categorical variables represented as text or labels, whereas most machine learning algorithms require numerical input. Categorical encoding is the process of converting categorical data into numerical representations without losing meaningful information. Common encoding techniques include:
-- **One-hot encoding**: Converts each category into a binary variable (0 or 1). preferred to avoid redundant information and multicollinearity.
-- **Ordinal / Label encoding**: Replaces categories with integers and should only be used when categories have a natural order.
-- **Count / Frequency encoding**: Replaces each category with its frequency or proportion in the dataset.
+- **One-hot encoding**: Converts each category into binary variables (0/1) indicating presence or absence. K−1 dummy variables are used to avoid multicollinearity.
+- **Ordinal / Label encoding**: Assigns integer values to categories based on their natural order. Should be used only when an inherent ranking exists. when categories have a natural order.
+- **Count / Frequency encoding**: Replaces each category with its count or frequency in the dataset. Assumes that category popularity is predictive of the target.
 
 ### 4. Feature Engineering
 Feature engineering involves creating new features or transforming existing ones to better capture underlying patterns in the data. Rather than relying solely on raw attributes, engineered features can represent domain knowledge and relationships more effectively. Feature engineering can include combining multiple attributes, deriving indicator variables, or generating new features based on existing data. This process enhances the expressive power of the dataset and can significantly improve model accuracy and generalization.
