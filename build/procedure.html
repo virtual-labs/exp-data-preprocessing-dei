@@ -355,48 +355,38 @@
           
               </div>
               <p>In this experiment we will perform data preprocessing and feature engineering on the Titanic dataset by handling missing values, encoding categorical variables, normalizing numerical features, creating new meaningful features, and visualizing the data, in order to improve data quality and prepare it for effective machine learning model development.</p>
-          <ol>
-          <li><strong>Importing Required Libraries</strong>: Required Python libraries are imported at the beginning of the program. These include NumPy and Pandas for data handling, Matplotlib and Seaborn for data visualization, and Scikit-learn utilities for preprocessing, model preparation, and evaluation.</li>
-          <li><strong>Loading the Dataset</strong>: The Titanic dataset is loaded from a CSV file using the <code>read_csv()</code> function of Pandas. The dataset is stored in a DataFrame. After loading, the dataset contains a fixed number of rows (891) and columns (12) representing passenger information.</li>
-          <li><strong>Displaying Initial Records</strong>: The first five rows of the dataset are displayed using the <code>head()</code> function to obtain an initial understanding of the data values and structure.</li>
-          <li><strong>Dataset Analysis</strong>: Basic dataset analysis is performed using the <code>info()</code> function to examine:</li>
-          </ol>
+          <p><strong>Step 1</strong>: <strong>Importing Required Libraries</strong>: Required Python libraries are imported at the beginning of the program. These include NumPy and Pandas for data handling, Matplotlib and Seaborn for data visualization, and Scikit-learn utilities for preprocessing, model preparation, and evaluation.</p>
+          <p><strong>Step 2</strong>: <strong>Loading the Dataset</strong>: The Titanic dataset is loaded from a CSV file using the <code>read_csv()</code> function of Pandas. The dataset is stored in a DataFrame. After loading, the dataset contains a fixed number of rows (891) and columns (12) representing passenger information.</p>
+          <p><strong>Step 3</strong>: <strong>Displaying Initial Records</strong>: The first five rows of the dataset are displayed using the <code>head()</code> function to obtain an initial understanding of the data values and structure.</p>
+          <p><strong>Step 4</strong>: <strong>Dataset Analysis</strong>: Basic dataset analysis is performed using the <code>info()</code> function to examine:</p>
           <ul>
           <li>Column names</li>
           <li>Data types of each feature</li>
           <li>Number of non-null values
           This step helps in identifying numerical and categorical attributes and detecting missing values.</li>
           </ul>
-          <ol start="5">
-          <li><strong>Identifying Missing Values</strong>: Missing values in the dataset are identified by checking null counts for each column. This helps determine which attributes require missing value treatment before further processing.</li>
-          <li><strong>Handling Missing Values</strong>: Missing values are handled as follows:</li>
-          </ol>
+          <p><strong>Step 5</strong>: <strong>Identifying Missing Values</strong>: Missing values in the dataset are identified by checking null counts for each column. This helps determine which attributes require missing value treatment before further processing.</p>
+          <p><strong>Step 6</strong>: <strong>Handling Missing Values</strong>: Missing values are handled as follows:</p>
           <ul>
           <li>The <strong>Age</strong> attribute is filled using the mean value of the column.</li>
           <li>The <strong>Embarked</strong> attribute is filled using the most frequent value (mode).</li>
           <li>The <strong>Cabin</strong> column is dropped due to a large number of missing values.
           After this step, a cleaned dataset (<code>df_clean</code>) is created with no null values.</li>
           </ul>
-          <ol start="7">
-          <li><strong>Normalization of Numerical Features</strong>: Numerical features such as <strong>Age</strong> and <strong>Fare</strong> are normalized using <code>StandardScaler</code>. Normalization brings all numerical features to a common scale and prevents features with larger values from dominating the learning process.</li>
-          <li><strong>Encoding Categorical Variables</strong>: Categorical features are converted into numerical form:</li>
-          </ol>
+          <p><strong>Step 7</strong>: <strong>Normalization of Numerical Features</strong>: Numerical features such as <strong>Age</strong> and <strong>Fare</strong> are normalized using <code>StandardScaler</code>. Normalization brings all numerical features to a common scale and prevents features with larger values from dominating the learning process.</p>
+          <p><strong>Step 8</strong>: <strong>Encoding Categorical Variables</strong>: Categorical features are converted into numerical form:</p>
           <ul>
           <li>The <strong>Sex</strong> attribute is encoded using Label Encoding.</li>
           <li>The <strong>Embarked</strong> attribute is also encoded numerically.
           Encoding is necessary to make categorical data compatible with machine learning algorithms.</li>
           </ul>
-          <ol start="9">
-          <li><strong>Data Visualization</strong>: Data visualization is performed to understand feature distributions and relationships:</li>
-          </ol>
+          <p><strong>Step 9</strong>: <strong>Data Visualization</strong>: Data visualization is performed to understand feature distributions and relationships:</p>
           <ul>
           <li>Count plots are used for categorical variables such as <strong>Sex</strong> and <strong>Survival</strong>.</li>
           <li>Distribution plots and box plots are used for numerical variables such as <strong>Age</strong> and <strong>Fare</strong>.
           Visualization helps in identifying patterns, trends, and potential outliers in the data.</li>
           </ul>
-          <ol start="10">
-          <li><strong>Feature Engineering – Creating New Features</strong>: New meaningful features are created to improve model learning:</li>
-          </ol>
+          <p><strong>Step 10</strong>: <strong>Feature Engineering – Creating New Features</strong>: New meaningful features are created to improve model learning:</p>
           <ul>
           <li><strong>FamilySize</strong> is created using the formula: <code>FamilySize = SibSp + Parch + 1</code></li>
           <li><strong>IsAlone</strong> is created where:<ul>
@@ -406,10 +396,8 @@
           </ul>
           </li>
           </ul>
-          <ol start="11">
-          <li><strong>Adding Engineered Features to Dataset</strong>: The newly created features <strong>FamilySize</strong> and <strong>IsAlone</strong> are added to the cleaned dataset (<code>df_clean</code>) and displayed to verify correct feature creation.</li>
-          <li><strong>Final Dataset Verification</strong>: The final cleaned and preprocessed dataset is examined using descriptive statistics to verify:</li>
-          </ol>
+          <p><strong>Step 11</strong>: <strong>Adding Engineered Features to Dataset</strong>: The newly created features <strong>FamilySize</strong> and <strong>IsAlone</strong> are added to the cleaned dataset (<code>df_clean</code>) and displayed to verify correct feature creation.</p>
+          <p><strong>Step 12</strong>: <strong>Final Dataset Verification</strong>: The final cleaned and preprocessed dataset is examined using descriptive statistics to verify:</p>
           <ul>
           <li>No missing values remain</li>
           <li>All categorical variables are encoded</li>

@@ -536,14 +536,14 @@
                 </div>
           
                 <div class="question intermediate">
-                  Why is encoding necessary in data preprocessing?
+                  Which of the following best describes the role of encoding in machine learning models?
                 </div>
           
                 <div class="answers">
                   <div id="answer4a">
                     <label>
                       <input type="radio" name="question4" value="a">
-                      a: To remove noise
+                      a: It improves model accuracy automatically
                     </label>
                     <a href="#" id="explanation4a" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -551,7 +551,7 @@
                   <div id="answer4b">
                     <label>
                       <input type="radio" name="question4" value="b">
-                      b: To visualize data
+                      b: It converts categorical attributes into a machine-readable format
                     </label>
                     <a href="#" id="explanation4b" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -559,7 +559,7 @@
                   <div id="answer4c">
                     <label>
                       <input type="radio" name="question4" value="c">
-                      c: To convert categorical data into numerical form
+                      c: It removes irrelevant features
                     </label>
                     <a href="#" id="explanation4c" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -567,7 +567,7 @@
                   <div id="answer4d">
                     <label>
                       <input type="radio" name="question4" value="d">
-                      d: To normalize features
+                      d: It scales numerical data
                     </label>
                     <a href="#" id="explanation4d" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -614,14 +614,14 @@
                 </div>
           
                 <div class="question beginner">
-                  What is the main purpose of normalization?
+                  What problem does normalization help prevent in machine learning models?
                 </div>
           
                 <div class="answers">
                   <div id="answer6a">
                     <label>
                       <input type="radio" name="question6" value="a">
-                      a: To remove missing values
+                      a: Missing values in data
                     </label>
                     <a href="#" id="explanation6a" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -629,7 +629,7 @@
                   <div id="answer6b">
                     <label>
                       <input type="radio" name="question6" value="b">
-                      b: To reduce dataset size
+                      b: Bias due to large numerical feature values
                     </label>
                     <a href="#" id="explanation6b" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -637,7 +637,7 @@
                   <div id="answer6c">
                     <label>
                       <input type="radio" name="question6" value="c">
-                      c: To bring numerical features to a common scale
+                      c: Incorrect class labels
                     </label>
                     <a href="#" id="explanation6c" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -645,7 +645,7 @@
                   <div id="answer6d">
                     <label>
                       <input type="radio" name="question6" value="d">
-                      d: To encode categorical data
+                      d: Overfitting of the dataset
                     </label>
                     <a href="#" id="explanation6d" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -692,14 +692,14 @@
                 </div>
           
                 <div class="question beginner">
-                  Why is data visualization useful after preprocessing?
+                  What is the main advantage of performing data visualization after preprocessing?
                 </div>
           
                 <div class="answers">
                   <div id="answer8a">
                     <label>
                       <input type="radio" name="question8" value="a">
-                      a: To train a model
+                      a: To convert categorical features into numbers
                     </label>
                     <a href="#" id="explanation8a" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -707,7 +707,7 @@
                   <div id="answer8b">
                     <label>
                       <input type="radio" name="question8" value="b">
-                      b: To encode variables
+                      b: To validate the effectiveness of preprocessing steps
                     </label>
                     <a href="#" id="explanation8b" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -715,7 +715,7 @@
                   <div id="answer8c">
                     <label>
                       <input type="radio" name="question8" value="c">
-                      c: To understand data distribution and patterns
+                      c: To train machine learning models
                     </label>
                     <a href="#" id="explanation8c" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -723,7 +723,7 @@
                   <div id="answer8d">
                     <label>
                       <input type="radio" name="question8" value="d">
-                      d: To reduce features
+                      d: To increase dataset size
                     </label>
                     <a href="#" id="explanation8d" class="accordion" onclick="return false;">Explanation</a>
                   </div>
@@ -774,7 +774,7 @@
             </div>
           
             <script>
-              const myQuestions = [{"question":"Which method was used to handle missing values in the Age attribute?","answers":{"a":"Mean","b":"Median","c":"Mode","d":"Deletion"},"explanations":{"a":"Missing values in the Age attribute were replaced using the mean, which represents the average age in the dataset.","b":"The median method was not used for handling missing values in the Age attribute.","c":"The mode is generally used for categorical data and was not applied to the Age attribute.","d":"Records with missing Age values were retained to avoid unnecessary data loss."},"correctAnswer":"a","difficulty":"beginner"},{"question":"Why was the mean preferred for filling missing values in the Age column?","answers":{"a":"It represents the average value of the data","b":"It removes duplicate values","c":"It increases dataset size","d":"It converts data into numeric form"},"explanations":{"a":"The mean provides the average age of individuals and ensures uniform replacement of missing values.","b":"The mean does not remove duplicate values; it only replaces missing entries.","c":"Using the mean does not affect the number of records in the dataset.","d":"The mean is a statistical measure and does not perform data type conversion."},"correctAnswer":"a","difficulty":"beginner"},{"question":"How were missing values in the Embarked attribute handled?","answers":{"a":"Most frequent value","b":"Mean value","c":"Median value","d":"Row removal"},"explanations":{"a":"Missing values were replaced with the category that appears most frequently in the Embarked attribute.","b":"The mean cannot be applied to categorical attributes like Embarked.","c":"The median is suitable for numerical data and not for categorical variables.","d":"Rows with missing values were not removed to avoid unnecessary data loss."},"correctAnswer":"a","difficulty":"beginner"},{"question":"Which attribute was encoded to convert categorical data into numerical form?","answers":{"a":"Age","b":"Fare","c":"Sex","d":"Pclass"},"explanations":{"a":"Age is a numerical attribute and does not require encoding.","b":"Fare is already a numerical attribute and does not require encoding.","c":"Sex is a categorical attribute and was encoded to convert it into numerical form for machine learning models.","d":"Pclass is represented using numerical values and was not encoded in this process."},"correctAnswer":"c","difficulty":"intermediate"},{"question":"Why is encoding necessary in data preprocessing?","answers":{"a":"To remove noise","b":"To visualize data","c":"To convert categorical data into numerical form","d":"To normalize features"},"explanations":{"a":"Noise removal is a data cleaning step and is not the purpose of encoding.","b":"Data visualization is used for analysis and interpretation, not for encoding.","c":"Encoding converts categorical variables into numerical values that machine learning algorithms can process.","d":"Normalization scales numerical features and is a separate preprocessing step."},"correctAnswer":"c","difficulty":"intermediate"},{"question":"Which features were normalized in the experiment?","answers":{"a":"Sex and Embarked","b":"Age and Fare","c":"Pclass and Sex","d":"Embarked and Pclass"},"explanations":{"a":"Sex and Embarked are categorical features and are handled using encoding, not normalization.","b":"Age and Fare are numerical features and were normalized to bring them to a common scale.","c":"Sex is categorical and not suitable for normalization.","d":"Embarked is categorical and Pclass was not normalized in this experiment."},"correctAnswer":"b","difficulty":"intermediate"},{"question":"What is the main purpose of normalization?","answers":{"a":"To remove missing values","b":"To reduce dataset size","c":"To bring numerical features to a common scale","d":"To encode categorical data"},"explanations":{"a":"Removing missing values is part of data cleaning, not normalization.","b":"Normalization does not affect the number of records in the dataset.","c":"Normalization scales numerical features so that no single feature dominates the learning process.","d":"Encoding categorical data is a separate preprocessing step."},"correctAnswer":"c","difficulty":"beginner"},{"question":"When was data visualization performed in the experiment?","answers":{"a":"Before loading the dataset","b":"Before handling missing values","c":"After preprocessing the dataset","d":"During dataset collection"},"explanations":{"a":"Data visualization cannot be performed before the dataset is loaded.","b":"Visualization was performed after preprocessing, not before handling missing values.","c":"Visualization was carried out after cleaning and preprocessing to better understand the refined data.","d":"Dataset collection is a separate step and does not involve data visualization."},"correctAnswer":"c","difficulty":"intermediate"},{"question":"Why is data visualization useful after preprocessing?","answers":{"a":"To train a model","b":"To encode variables","c":"To understand data distribution and patterns","d":"To reduce features"},"explanations":{"a":"Model training is performed using algorithms, not visualization techniques.","b":"Encoding is a preprocessing task and not achieved through visualization.","c":"Visualization helps in analyzing distributions, trends, and relationships within the cleaned data.","d":"Feature reduction is a separate process and not the purpose of visualization."},"correctAnswer":"c","difficulty":"beginner"},{"question":"The final output of this experiment is:","answers":{"a":"A trained machine learning model","b":"Raw dataset","c":"Clean and preprocessed dataset","d":"Reduced dataset"},"explanations":{"a":"Model training was not part of this experiment.","b":"The dataset was processed and cleaned, not left in raw form.","c":"The experiment focused on preprocessing and feature engineering, resulting in a clean dataset.","d":"Feature reduction was not performed in this experiment."},"correctAnswer":"c","difficulty":"intermediate"}];
+              const myQuestions = [{"question":"Which method was used to handle missing values in the Age attribute?","answers":{"a":"Mean","b":"Median","c":"Mode","d":"Deletion"},"explanations":{"a":"Missing values in the Age attribute were replaced using the mean, which represents the average age in the dataset.","b":"The median method was not used for handling missing values in the Age attribute.","c":"The mode is generally used for categorical data and was not applied to the Age attribute.","d":"Records with missing Age values were retained to avoid unnecessary data loss."},"correctAnswer":"a","difficulty":"beginner"},{"question":"Why was the mean preferred for filling missing values in the Age column?","answers":{"a":"It represents the average value of the data","b":"It removes duplicate values","c":"It increases dataset size","d":"It converts data into numeric form"},"explanations":{"a":"The mean provides the average age of individuals and ensures uniform replacement of missing values.","b":"The mean does not remove duplicate values; it only replaces missing entries.","c":"Using the mean does not affect the number of records in the dataset.","d":"The mean is a statistical measure and does not perform data type conversion."},"correctAnswer":"a","difficulty":"beginner"},{"question":"How were missing values in the Embarked attribute handled?","answers":{"a":"Most frequent value","b":"Mean value","c":"Median value","d":"Row removal"},"explanations":{"a":"Missing values were replaced with the category that appears most frequently in the Embarked attribute.","b":"The mean cannot be applied to categorical attributes like Embarked.","c":"The median is suitable for numerical data and not for categorical variables.","d":"Rows with missing values were not removed to avoid unnecessary data loss."},"correctAnswer":"a","difficulty":"beginner"},{"question":"Which attribute was encoded to convert categorical data into numerical form?","answers":{"a":"Age","b":"Fare","c":"Sex","d":"Pclass"},"explanations":{"a":"Age is a numerical attribute and does not require encoding.","b":"Fare is already a numerical attribute and does not require encoding.","c":"Sex is a categorical attribute and was encoded to convert it into numerical form for machine learning models.","d":"Pclass is represented using numerical values and was not encoded in this process."},"correctAnswer":"c","difficulty":"intermediate"},{"question":"Which of the following best describes the role of encoding in machine learning models?","answers":{"a":"It improves model accuracy automatically","b":"It converts categorical attributes into a machine-readable format","c":"It removes irrelevant features","d":"It scales numerical data"},"explanations":{"a":"Encoding alone does not guarantee accuracy improvement.","b":"Encoding converts categorical variables into numerical representations required by machine learning algorithms.","c":"Feature removal is part of feature selection, not encoding.","d":"Scaling is performed using normalization or standardization, not encoding."},"correctAnswer":"b","difficulty":"intermediate"},{"question":"Which features were normalized in the experiment?","answers":{"a":"Sex and Embarked","b":"Age and Fare","c":"Pclass and Sex","d":"Embarked and Pclass"},"explanations":{"a":"Sex and Embarked are categorical features and are handled using encoding, not normalization.","b":"Age and Fare are numerical features and were normalized to bring them to a common scale.","c":"Sex is categorical and not suitable for normalization.","d":"Embarked is categorical and Pclass was not normalized in this experiment."},"correctAnswer":"b","difficulty":"intermediate"},{"question":"What problem does normalization help prevent in machine learning models?","answers":{"a":"Missing values in data","b":"Bias due to large numerical feature values","c":"Incorrect class labels","d":"Overfitting of the dataset"},"explanations":{"a":"Missing values are handled using imputation methods.","b":"Normalization prevents features with larger ranges from dominating the learning process.","c":"Class labels are not affected by normalization.","d":"Overfitting is mainly handled using regularization and validation techniques."},"correctAnswer":"b","difficulty":"beginner"},{"question":"When was data visualization performed in the experiment?","answers":{"a":"Before loading the dataset","b":"Before handling missing values","c":"After preprocessing the dataset","d":"During dataset collection"},"explanations":{"a":"Data visualization cannot be performed before the dataset is loaded.","b":"Visualization was performed after preprocessing, not before handling missing values.","c":"Visualization was carried out after cleaning and preprocessing to better understand the refined data.","d":"Dataset collection is a separate step and does not involve data visualization."},"correctAnswer":"c","difficulty":"intermediate"},{"question":"What is the main advantage of performing data visualization after preprocessing?","answers":{"a":"To convert categorical features into numbers","b":"To validate the effectiveness of preprocessing steps","c":"To train machine learning models","d":"To increase dataset size"},"explanations":{"a":"Encoding handles categorical conversion, not visualization.","b":"Visualization helps confirm correct handling of missing values, scaling, and feature distributions.","c":"Model training is not done using visualization.","d":"Visualization does not change dataset size."},"correctAnswer":"b","difficulty":"beginner"},{"question":"The final output of this experiment is:","answers":{"a":"A trained machine learning model","b":"Raw dataset","c":"Clean and preprocessed dataset","d":"Reduced dataset"},"explanations":{"a":"Model training was not part of this experiment.","b":"The dataset was processed and cleaned, not left in raw form.","c":"The experiment focused on preprocessing and feature engineering, resulting in a clean dataset.","d":"Feature reduction was not performed in this experiment."},"correctAnswer":"c","difficulty":"intermediate"}];
             </script>
             <script src="./assets/js/assessment_v2.js"></script>
           <div class="bug-report-mobile">
