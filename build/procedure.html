@@ -349,63 +349,83 @@
                         </div>
                     </div>
                 </div>
-          </div>          <div class="vlabs-page-content px-5 pb-4 flex-grow-1 markdown-body">
-            <div class="text-center fix-spacing">
-              <h2 id="data-preprocessing-and-feature-engineering">Data Preprocessing and Feature Engineering</h2>
+          </div>            <div class="vlabs-page-content px-5 pb-4 flex-grow-1 markdown-body">
+              <div class="text-center fix-spacing">
+                <h2 id="data-preprocessing-and-feature-engineering">Data Preprocessing and Feature Engineering</h2>
           
-            </div>
+              </div>
               <p>In this experiment we will perform data preprocessing and feature engineering on the Titanic dataset by handling missing values, encoding categorical variables, normalizing numerical features, creating new meaningful features, and visualizing the data, in order to improve data quality and prepare it for effective machine learning model development.</p>
-          <p><strong>Step 1</strong>: <strong>Importing Required Libraries</strong>: Required Python libraries are imported at the beginning of the program. These include NumPy and Pandas for data handling, Matplotlib and Seaborn for data visualization, and Scikit-learn utilities for preprocessing, model preparation, and evaluation.</p>
-          <p><strong>Step 2</strong>: <strong>Loading the Dataset</strong>: The Titanic dataset is loaded from a CSV file using the <code>read_csv()</code> function of Pandas. The dataset is stored in a DataFrame. After loading, the dataset contains a fixed number of rows (891) and columns (12) representing passenger information.</p>
-          <p><strong>Step 3</strong>: <strong>Displaying Initial Records</strong>: The first five rows of the dataset are displayed using the <code>head()</code> function to obtain an initial understanding of the data values and structure.</p>
-          <p><strong>Step 4</strong>: <strong>Dataset Analysis</strong>: Basic dataset analysis is performed using the <code>info()</code> function to examine:</p>
+          <h3 id="step-1-importing-required-libraries">Step 1: Importing Required Libraries</h3>
+          <p>The required Python libraries are imported at the beginning of the program. These include NumPy and Pandas for data manipulation and handling, Matplotlib and Seaborn for data visualization, and Scikit-learn utilities such as <code>LabelEncoder</code>, <code>OrdinalEncoder</code>, <code>StandardScaler</code>, <code>MinMaxScaler</code>, <code>RobustScaler</code>, and z-score functions for preprocessing operations like encoding, feature scaling, and outlier detection.
+          Additionally, IPython display utilities (HTML display) and ipywidgets are used to build an interactive simulation environment, enabling dynamic user inputs and real-time visualization of preprocessing steps.</p>
+          <h3 id="step-2-loading-the-dataset">Step 2: Loading the Dataset</h3>
+          <p>The Titanic dataset is loaded from a CSV file using the <code>read_csv()</code> function of the Pandas library. The dataset is stored in a DataFrame structure for further analysis. After loading, the dataset contains 891 rows and multiple columns representing passenger-related attributes.</p>
+          <h3 id="step-3-displaying-initial-records">Step 3: Displaying Initial Records</h3>
+          <p>The first few rows of the dataset are displayed using the <code>head()</code> function. This provides an initial overview of the dataset and helps in understanding the structure and values of the attributes.</p>
+          <h3 id="step-4-dataset-analysis">Step 4: Dataset Analysis</h3>
+          <p>Basic dataset analysis is performed using the <code>info()</code> function to examine:</p>
           <ul>
           <li>Column names</li>
-          <li>Data types of each feature</li>
-          <li>Number of non-null values
-          This step helps in identifying numerical and categorical attributes and detecting missing values.</li>
+          <li>Data types of each attribute</li>
+          <li>Number of non-null values in each column</li>
           </ul>
-          <p><strong>Step 5</strong>: <strong>Identifying Missing Values</strong>: Missing values in the dataset are identified by checking null counts for each column. This helps determine which attributes require missing value treatment before further processing.</p>
-          <p><strong>Step 6</strong>: <strong>Handling Missing Values</strong>: Missing values are handled as follows:</p>
+          <p>This step helps distinguish between numerical and categorical variables and provides an initial indication of missing values present in the dataset.</p>
+          <h4 id="displaying-descriptors">Displaying Descriptors</h4>
+          <p>In addition to structural information, descriptive statistics of the dataset are examined using statistical summary functions. These descriptors provide insights into measures such as mean, standard deviation, minimum, maximum, and quartile values, which help in understanding the distribution of numerical attributes.</p>
+          <h3 id="step-5-identifying-missing-values">Step 5: Identifying Missing Values</h3>
+          <p>Missing values in the dataset are identified by calculating the number of null entries present in each column. This helps determine which attributes require missing value treatment before further preprocessing steps are applied.</p>
+          <h3 id="step-6-handling-missing-values-numerical-attributes">Step 6: Handling Missing Values (Numerical Attributes)</h3>
+          <p>Missing values in numerical attributes are handled using statistical imputation techniques. The Age attribute is treated using different imputation methods such as:</p>
           <ul>
-          <li>The <strong>Age</strong> attribute is filled using the mean value of the column.</li>
-          <li>The <strong>Embarked</strong> attribute is filled using the most frequent value (mode).</li>
-          <li>The <strong>Cabin</strong> column is dropped due to a large number of missing values.
-          After this step, a cleaned dataset (<code>df_clean</code>) is created with no null values.</li>
+          <li>Mean imputation</li>
+          <li>Median imputation</li>
+          <li>Mode imputation</li>
+          <li>Constant value imputation</li>
           </ul>
-          <p><strong>Step 7</strong>: <strong>Normalization of Numerical Features</strong>: Numerical features such as <strong>Age</strong> and <strong>Fare</strong> are normalized using <code>StandardScaler</code>. Normalization brings all numerical features to a common scale and prevents features with larger values from dominating the learning process.</p>
-          <p><strong>Step 8</strong>: <strong>Encoding Categorical Variables</strong>: Categorical features are converted into numerical form:</p>
+          <p>These methods replace missing values with meaningful statistical estimates so that the dataset remains complete for further analysis.</p>
+          <h3 id="step-7-handling-missing-values-categorical-attributes">Step 7: Handling Missing Values (Categorical Attributes)</h3>
+          <p>Missing values in categorical attributes are handled using the most frequent value method. The category that occurs most frequently within the feature is identified and used to replace missing entries. This method helps maintain the natural distribution of categorical data while ensuring dataset completeness.</p>
+          <h3 id="step-8-encoding-categorical-variables">Step 8: Encoding Categorical Variables</h3>
+          <p>Categorical variables are transformed into numerical representations to make them compatible with machine learning algorithms. The following encoding techniques are applied depending on the nature of the categorical attribute:</p>
           <ul>
-          <li>The <strong>Sex</strong> attribute is encoded using Label Encoding.</li>
-          <li>The <strong>Embarked</strong> attribute is also encoded numerically.
-          Encoding is necessary to make categorical data compatible with machine learning algorithms.</li>
+          <li><strong>Label Encoding</strong> for binary categorical variables</li>
+          <li><strong>One-Hot Encoding</strong> for nominal variables without inherent ordering</li>
+          <li><strong>Ordinal Encoding</strong> for categorical attributes that possess a natural ranking</li>
           </ul>
-          <p><strong>Step 9</strong>: <strong>Data Visualization</strong>: Data visualization is performed to understand feature distributions and relationships:</p>
+          <p>This step ensures that categorical features can be effectively used during model training and analysis.</p>
+          <h3 id="step-9-feature-scaling-normalization">Step 9: Feature Scaling (Normalization)</h3>
+          <p>Numerical attributes such as Age and Fare are scaled to a comparable range using feature scaling techniques. Scaling ensures that features with larger magnitudes do not dominate the learning process.
+          The following scaling techniques are explored:</p>
           <ul>
-          <li>Count plots are used for categorical variables such as <strong>Sex</strong> and <strong>Survival</strong>.</li>
-          <li>Distribution plots and box plots are used for numerical variables such as <strong>Age</strong> and <strong>Fare</strong>.
-          Visualization helps in identifying patterns, trends, and potential outliers in the data.</li>
+          <li><strong>StandardScaler</strong> (Standardization)</li>
+          <li><strong>MinMaxScaler</strong> (Min-Max Normalization)</li>
+          <li><strong>RobustScaler</strong> (Scaling using median and interquartile range)</li>
           </ul>
-          <p><strong>Step 10</strong>: <strong>Feature Engineering – Creating New Features</strong>: New meaningful features are created to improve model learning:</p>
+          <p>Feature scaling improves numerical stability and helps machine learning algorithms converge more efficiently.</p>
+          <h3 id="step-10-outlier-detection">Step 10: Outlier Detection</h3>
+          <p>Outliers present in numerical attributes are identified using statistical techniques such as:</p>
           <ul>
-          <li><strong>FamilySize</strong> is created using the formula: <code>FamilySize = SibSp + Parch + 1</code></li>
-          <li><strong>IsAlone</strong> is created where:<ul>
-          <li><code>IsAlone = 1</code> if <strong>FamilySize</strong> equals 1</li>
-          <li><code>IsAlone = 0</code> otherwise
-          These features capture family-related passenger information.</li>
+          <li><strong>Z-Score Method</strong></li>
+          <li><strong>Interquartile Range (IQR) Method</strong></li>
           </ul>
-          </li>
-          </ul>
-          <p><strong>Step 11</strong>: <strong>Adding Engineered Features to Dataset</strong>: The newly created features <strong>FamilySize</strong> and <strong>IsAlone</strong> are added to the cleaned dataset (<code>df_clean</code>) and displayed to verify correct feature creation.</p>
-          <p><strong>Step 12</strong>: <strong>Final Dataset Verification</strong>: The final cleaned and preprocessed dataset is examined using descriptive statistics to verify:</p>
+          <p>These techniques help detect extreme values that significantly deviate from the majority of the dataset. Identifying outliers assists in understanding unusual patterns and improving data reliability.</p>
+          <h3 id="step-11-feature-engineering">Step 11: Feature Engineering</h3>
+          <p>Feature engineering is performed to generate new informative attributes from the existing dataset. This step involves transforming or combining relevant attributes to create features that better represent relationships within the data. Such engineered features enhance the dataset’s ability to capture meaningful patterns during analysis.</p>
+          <h3 id="step-12-data-visualization-and-analysis">Step 12: Data Visualization and Analysis</h3>
+          <p>Data visualization techniques are used to explore the dataset and analyze feature distributions. Graphical representations such as histograms, box plots, and categorical plots are used to study the distribution of attributes, identify patterns, and observe the presence of anomalies or outliers.
+          Visualization also helps validate preprocessing steps such as scaling, encoding, and missing value handling.</p>
+          <h3 id="step-13-final-dataset-verification--raw-vs-processed-">Step 13: Final Dataset Verification { raw vs processed }</h3>
+          <p>The final preprocessed dataset is examined using descriptive statistics and summary functions to ensure that:</p>
           <ul>
-          <li>No missing values remain</li>
-          <li>All categorical variables are encoded</li>
-          <li>Numerical features are normalized</li>
-          <li>New engineered features are successfully added</li>
+          <li>Missing values have been properly handled</li>
+          <li>Categorical variables are correctly encoded</li>
+          <li>Numerical attributes are scaled appropriately</li>
+          <li>Engineered features are successfully generated</li>
+          <li>Outliers have been analyzed</li>
           </ul>
+          <p>This step confirms that the dataset is clean, consistent, and ready for further machine learning tasks.</p>
           
-          </div>
+            </div>
           <div class="bug-report-mobile">
               <bug-report id="bug-report" title="[BUG REPORT] DATA PREPROCESSING AND FEATURE ENGINEERING" page-type="text" context-info="{&quot;organisation&quot;:&quot;Virtual Labs&quot;,&quot;developer_institute&quot;:&quot;DLBG&quot;,&quot;expname&quot;:&quot;DATA PREPROCESSING AND FEATURE ENGINEERING&quot;,&quot;labname&quot;:&quot;Virtual Lab&quot;,&quot;phase&quot;:&quot;Testing&quot;}" checkbox-json="{&quot;text&quot;:[&quot;Insufficient Content&quot;],&quot;video&quot;:[&quot;Insufficient Content&quot;],&quot;assesment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;assessment&quot;:[&quot;Incorrect Options&quot;,&quot;Incorrect Answer&quot;,&quot;Incorrect Question&quot;],&quot;simulation&quot;:[&quot;Simulation Not Working&quot;,&quot;Incorrect Results/Observations&quot;,&quot;Insufficient/Incorrect Instructions&quot;],&quot;DEFAULT&quot;:[&quot;Page Not Loading&quot;,&quot;Content Not Visible&quot;,&quot;Incorrect Content&quot;]}" position="override" button_style="
                           position: fixed; 
