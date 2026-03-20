@@ -1,38 +1,227 @@
-In machine learning, raw data obtained from real-world sources is rarely suitable for direct use in algorithms. Such data often contains missing values, inconsistent feature scales, noise, and categorical variables that models cannot process directly. Data preprocessing is therefore a crucial step that involves cleaning, transforming, and organizing the dataset so that it becomes consistent and suitable for learning. Along with preprocessing, feature engineering helps in improving model performance by creating meaningful features that better represent underlying patterns in the data.
+### 1. Data Preprocessing
+In machine learning, raw datasets collected from real-world environments often contain inconsistencies such as missing values, categorical attributes, noisy data, and varying feature scales. These issues can significantly affect the performance and reliability of machine learning algorithms.
 
-### 1. Handling Missing Data
-Missing data occurs when values are absent for certain attributes in a dataset and is a common challenge in real-world data analysis. Missing values may arise due to data collection errors, incomplete observations, system failures, or random occurrences. If left untreated, missing data can distort statistical analysis and negatively affect the performance of machine learning models. To address this issue, missing values are first identified and analyzed. Numerical attributes are commonly handled using statistical imputation techniques such as mean or median substitution, while categorical attributes are often filled using the most frequent category. In cases where an attribute contains an excessive number of missing values, it may be removed to maintain data reliability. Proper handling of missing data ensures dataset completeness and consistency before further processing.
+Data preprocessing is therefore a fundamental step that involves cleaning, transforming, and organizing the dataset before it is used for analysis or model training. Proper preprocessing ensures that the dataset is complete, consistent, and structured in a way that allows machine learning algorithms to learn meaningful patterns from the data.
 
-### 2. Normalization
-Normalization is a preprocessing technique used to rescale numerical features so that they lie within a comparable range. In many datasets, numerical attributes may have significantly different scales, which can cause learning algorithms to be biased toward features with larger magnitudes. Normalization addresses this issue by transforming feature values using scaling techniques such as min–max normalization or standardization. This process improves numerical stability, speeds up model convergence, and ensures that all numerical features contribute equally to the learning process.
+### 2. Handling Missing Values (Numerical Features)
+Missing values occur when observations for certain attributes are absent in a dataset. This may happen due to incomplete data collection, measurement errors, or system failures. Numerical attributes such as age, fare, or income frequently contain missing values that must be addressed before analysis.
+Several statistical imputation techniques are commonly used to replace missing numerical values.
 
-Min-max normalization (usually called feature scaling) performs a linear transformation on the original data. This technique gets all the scaled data in the range [0,1]. The formula to achieve this is the following:
-
-<div align="center" style="font-size: 1.2rem; margin: 20px 0;">
-    <strong>x<sub>scaled</sub> = </strong>
-    <div style="display: inline-block; vertical-align: middle; text-align: center;">
-        <div style="border-bottom: 1.5px solid black; padding: 0 10px;">x &minus; x<sub>min</sub></div>
-        <div style="padding: 0 10px;">x<sub>max</sub> &minus; x<sub>min</sub></div>
-    </div>
-</div>
-
-Min-max normalization preserves the relationships among the original data values. The cost of having this bounded range is that we will end up with smaller standard deviations, which can suppress the effect of outliers.
-
-### 3. Categorical Encoding
-Many real-world datasets contain categorical variables represented as text or labels, whereas most machine learning algorithms require numerical input. Categorical encoding is the process of converting categorical data into numerical representations without losing meaningful information. Common encoding techniques include:
-- **One-hot encoding**: Converts each category into binary variables (0/1) indicating presence or absence. K−1 dummy variables are used to avoid multicollinearity.
-- **Ordinal / Label encoding**: Assigns integer values to categories based on their natural order. Should be used only when an inherent ranking exists. when categories have a natural order.
-- **Count / Frequency encoding**: Replaces each category with its count or frequency in the dataset. Assumes that category popularity is predictive of the target.
-
-### 4. Feature Engineering
-Feature engineering involves creating new features or transforming existing ones to better capture underlying patterns in the data. Rather than relying solely on raw attributes, engineered features can represent domain knowledge and relationships more effectively. Feature engineering can include combining multiple attributes, deriving indicator variables, or generating new features based on existing data. This process enhances the expressive power of the dataset and can significantly improve model accuracy and generalization.
-
-### 5. Data Visualization
-Data visualization is an important analytical step used to visually explore and understand the characteristics of a dataset. Visualization techniques help reveal patterns, trends, distributions, and potential anomalies in the data. Univariate visualizations are used to analyze individual feature distributions, while bivariate visualizations help study relationships between pairs of variables. Visualization also aids in validating preprocessing steps such as normalization and encoding, ensuring that transformations have been applied correctly.
-
-The figure below illustrates the pipeline of the experiment, showing the sequence of steps involved in data preprocessing and feature engineering, starting from raw data and resulting in preprocessed data ready for machine learning models:
+**Mean Imputation** replaces missing values with the average value of the feature. If a numerical attribute X contains missing values, the mean value is calculated as:
 
 <div align="center" style="margin: 20px 0;">
-    <img src="images/data_preprocessing_pipeline.png" alt="Data Preprocessing Pipeline" style="max-width: 80%;">
-    <br>
+    <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
+        <i>x̄</i> = 
+        <div style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 3px;">
+            <div style="border-bottom: 1.5px solid black; padding: 2px 8px;">1</div>
+            <div style="padding: 2px 8px;"><i>n</i></div>
+        </div>
+        <span style="font-size: 1.5em; vertical-align: middle;">Σ</span>
+        <div style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 3px;">
+            <div style="font-size: 0.7em;"><i>n</i></div>
+            <div style="font-size: 0.7em;"><i>i</i>=1</div>
+        </div>
+        <i>x<sub>i</sub></i>
+    </span>
 </div>
+
+The missing values are then replaced with *x̄*.
+
+**Median Imputation** replaces missing values with the median of the feature, which represents the middle value when the data is sorted. This approach is particularly useful when the data distribution is skewed or contains outliers.
+
+**Mode Imputation** replaces missing values with the most frequently occurring value in the feature. Although more common for categorical attributes, it can also be used for numerical variables with repeated values.
+
+**Constant Imputation** replaces missing values with a fixed constant such as zero or another predefined value. This approach is sometimes used when missing values need to be represented explicitly.
+
+Handling numerical missing values ensures that machine learning algorithms receive complete data without introducing bias or distortion in the dataset.
+
+### 3. Handling Missing Values (Categorical Features)
+Categorical attributes represent qualitative information such as labels, names, or categories. Missing values in categorical variables are commonly handled using **most frequent value imputation**, also known as mode imputation.
+
+In this technique, the missing values are replaced with the category that appears most frequently in the dataset. This method helps preserve the distribution of categorical values while maintaining the consistency of the dataset.
+
+For example, if the most frequent value in the “Embarked” column is “S”, all missing entries in that column can be replaced with “S”. This approach ensures that the dataset remains logically consistent without introducing new artificial categories.
+
+### 4. Encoding Categorical Features
+Many machine learning algorithms require numerical input and cannot process textual categorical values directly. Categorical encoding converts categorical variables into numerical representations while preserving their meaningful structure.
+
+Several encoding techniques are commonly used.
+
+**Label Encoding** assigns a unique integer value to each category. For example:
+
+| Category | Encoded Value |
+| :--- | :--- |
+| Male | 0 |
+| Female | 1 |
+
+This technique is commonly used for binary categorical variables.
+
+**One-Hot Encoding** converts each category into a separate binary feature. For example, if a variable has categories A, B, and C, it is transformed into three separate columns where each column indicates whether a particular category is present or not.
+
+| A | B | C |
+| :--- | :--- | :--- |
+| True | False | False |
+| False | True | False |
+| False | False | True |
+
+In this representation, True indicates the presence of a category, while False indicates its absence. This method ensures that no artificial ordering is introduced between categories. One-Hot Encoding is particularly suitable for nominal variables, where the categories do not have any inherent ranking or order.
+
+**Ordinal Encoding** is used when categories have a natural ranking. Categories are assigned numerical values based on their relative order. For example:
+
+| Pclass | Encoded |
+| :--- | :--- |
+| 1 | 0 |
+| 2 | 1 |
+| 3 | 2 |
+
+This encoding preserves the hierarchical relationship between categories.
+
+Selecting the correct encoding technique ensures that categorical features are represented accurately without introducing misleading relationships.
+
+### 5. Feature Scaling and Normalization
+In many datasets, numerical features have significantly different ranges. Machine learning algorithms that rely on distance calculations can become biased toward features with larger magnitudes. Feature scaling addresses this issue by transforming numerical features into comparable ranges.
+Three common scaling techniques are used.
+
+#### Min-Max Scaling
+Min-Max scaling rescales data into a fixed range, typically between 0 and 1. The transformation is performed using the formula:
+
+<div align="center" style="margin: 20px 0;">
+    <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
+        <i>X</i><sub>scaled</sub> = 
+        <div style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 3px;">
+            <div style="border-bottom: 1.5px solid black; padding: 2px 8px;"><i>X</i> − <i>X</i><sub>min</sub></div>
+            <div style="padding: 2px 8px;"><i>X</i><sub>max</sub> − <i>X</i><sub>min</sub></div>
+        </div>
+    </span>
+</div>
+
+Where:
+- *X* = original value
+- *X<sub>min</sub>* = minimum value of the feature
+- *X<sub>max</sub>* = maximum value of the feature
+
+This method preserves the relationships among original data values but may be sensitive to outliers.
+
+#### Standard Scaling (Standardization)
+Standard scaling transforms the dataset so that the feature has a mean of zero and a standard deviation of one.
+The transformation is given by:
+
+<div align="center" style="margin: 20px 0;">
+    <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
+        <i>Z</i> = 
+        <div style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 3px;">
+            <div style="border-bottom: 1.5px solid black; padding: 2px 8px;"><i>X</i> − <i>μ</i></div>
+            <div style="padding: 2px 8px;"><i>σ</i></div>
+        </div>
+    </span>
+</div>
+
+Where:
+- *X* = original value
+- *μ* = mean of the feature
+- *σ* = standard deviation
+
+Standardization is widely used when data follows an approximately normal distribution.
+
+#### Robust Scaling
+Robust scaling is designed to handle datasets containing extreme values or outliers. Instead of using the mean and standard deviation, it uses the median and the interquartile range (IQR).
+The transformation is defined as:
+
+<div align="center" style="margin: 20px 0;">
+    <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
+        <i>X</i><sub>scaled</sub> = 
+        <div style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 3px;">
+            <div style="border-bottom: 1.5px solid black; padding: 2px 8px;"><i>X</i> − Median</div>
+            <div style="padding: 2px 8px;">IQR</div>
+        </div>
+    </span>
+</div>
+
+Where:
+<div align="center" style="margin: 15px 0;">
+    <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
+        IQR = Q3 − Q1
+    </span>
+</div>
+
+This method is less affected by extreme values and is suitable for datasets containing significant outliers.
+
+### 6. Outlier Detection
+Outliers are observations that significantly deviate from the majority of data points in a dataset. These extreme values can distort statistical analysis and negatively impact machine learning models.
+Two commonly used techniques for detecting outliers are the Z-Score method and the Interquartile Range (IQR) method.
+
+#### Z-Score Method
+The Z-Score measures how many standard deviations a data point lies from the mean of the dataset.
+The formula for the Z-Score is:
+
+<div align="center" style="margin: 20px 0;">
+    <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
+        <i>Z</i> = 
+        <div style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 3px;">
+            <div style="border-bottom: 1.5px solid black; padding: 2px 8px;"><i>X</i> − <i>μ</i></div>
+            <div style="padding: 2px 8px;"><i>σ</i></div>
+        </div>
+    </span>
+</div>
+
+Where:
+- *X* = observed value
+- *μ* = mean of the dataset
+- *σ* = standard deviation
+
+Typically, any value with a Z-Score greater than ±3 is considered an outlier.
+
+#### Interquartile Range (IQR) Method
+The IQR method is based on the concept of quartiles, which divide the dataset into four equal parts.
+- **Q1 (First Quartile)** → 25th percentile
+- **Q2 (Median)** → 50th percentile
+- **Q3 (Third Quartile)** → 75th percentile
+
+The interquartile range is defined as:
+
+<div align="center" style="margin: 15px 0;">
+    <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
+        IQR = Q3 − Q1
+    </span>
+</div>
+
+Outliers are identified using the following boundaries:
+<div align="center" style="margin: 15px 0;">
+    <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
+        Lower Bound = Q1 − 1.5 × IQR
+    </span>
+</div>
+<div align="center" style="margin: 15px 0;">
+    <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
+        Upper Bound = Q3 + 1.5 × IQR
+    </span>
+</div>
+
+Values outside this range are considered potential outliers.
+The IQR method is robust because it relies on quartiles rather than the mean, making it less sensitive to extreme values.
+
+### 7. Feature Engineering
+Feature engineering is the process of transforming existing attributes or creating new features from the available data in order to better represent the underlying patterns within a dataset. Instead of relying solely on raw variables, feature engineering helps improve the quality and relevance of the input features used by machine learning algorithms.
+
+Feature engineering may involve combining multiple attributes, deriving new variables from existing features, or transforming attributes into more meaningful representations. By capturing relationships between different variables, engineered features can provide additional contextual information that may not be directly available in the original dataset.
+
+For example, multiple related attributes describing similar characteristics can be combined to form a single informative feature that summarizes their combined effect. Such transformations help simplify the dataset while preserving important information.
+
+Effective feature engineering enhances the expressive power of the dataset and allows machine learning models to identify meaningful patterns more accurately. As a result, well-designed engineered features often lead to improved model performance, better interpretability, and more reliable predictions.
+
+### 8. Data Visualization
+Data visualization plays an important role in exploratory data analysis by providing graphical representations of data. Visual techniques help identify patterns, trends, distributions, and anomalies within the dataset.
+
+Univariate visualizations analyze the distribution of individual features, while bivariate visualizations help examine relationships between pairs of variables.
+Visualization also helps validate preprocessing steps such as normalization, encoding, and outlier detection. By observing changes in distributions and patterns, analysts can confirm that preprocessing techniques have been applied correctly.
+
+Through intuitive graphical representations, visualization enables a deeper understanding of the dataset and supports better decision-making throughout the machine learning workflow.
+
+<div align="center">
+<img src="images/data_preprocessing_pipeline.png" alt="Data Preprocessing Pipeline" width="600">
+<br>
+<strong>Figure 1: End-to-End Data Preprocessing and Feature Engineering Pipeline.</strong>
+</div>
+
+
+The figure 1 illustrates the pipeline of the experiment, showing the sequence of steps involved in data preprocessing and feature engineering, starting from raw data and resulting in preprocessed data ready for machine learning models.
