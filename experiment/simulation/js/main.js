@@ -1504,7 +1504,92 @@ def compare_datasets():
     )
 
 compare_datasets()`,
-        output: `<div class="output-text" style="font-family: monospace; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Raw Dataset vs Processed Dataset (first 10 samples)</div>
+        output: function () {
+          const selectedImp = window.selectedImputation || { method: "Mean", value: 30 };
+          const scaledMethods = window.scaledMethods || {};
+          const ageScaler = scaledMethods["Age"] || "StandardScaler";
+          const fareScaler = scaledMethods["Fare"] || "StandardScaler";
+
+          const ageValue = selectedImp.value;
+          const ageMethod = selectedImp.method;
+
+          // Specific mappings provided by the user
+          const ageMappings = {
+            "StandardScaler": { 42: "0.783", 49: "1.175", 2: "-1.455", 29: "0.056", 43: "0.839", 56: "1.566", 27: "-0.056", 23: "-0.280", 45: "0.951", 8: "-1.119", 18: "-0.559", 22: "-0.336", 25: "-0.168", 33: "0.280", 19: "-0.503", 24: "-0.224", 55: "1.538", 41: "0.727", 34: "0.336", 64: "2.014", 30: "0.112", 3: "-1.399", 20: "-0.448" },
+            "RobustScaler": { 42: "0.783", 49: "1.175", 2: "-1.455", 29: "0.056", 43: "0.839", 56: "1.566", 27: "-0.056", 23: "-0.280", 45: "0.951", 8: "-1.119", 18: "-0.559", 22: "-0.336", 25: "-0.168", 33: "0.280", 19: "-0.503", 24: "-0.224", 55: "1.538", 41: "0.727", 34: "0.336", 64: "2.014", 30: "0.112", 3: "-1.399", 20: "-0.448" },
+            "MinMaxScaler": { 27: "0.334", 36: "0.447", 23: "0.284", 33: "0.409", 40: "0.497", 30: "0.372", 6: "0.070", 22: "0.271", 62: "0.774", 16: "0.196", 25: "0.309", 20: "0.246", 37: "0.460", 18: "0.221", 29: "0.359", 2: "0.020", 38: "0.472", 64: "0.799", 39: "0.485", 8: "0.095", 42: "0.522", 19: "0.233", 4: "0.045", 35: "0.434" }
+          };
+
+          const fareMappings = {
+            "StandardScaler": { 7: "-0.313", 34: "0.863", 10: "-0.171", 9: "-0.216", 108: "4.090", 47: "1.414", 512: "21.563", 5: "-0.409", 8: "-0.277", 14: "0.000", 55: "1.775", 27: "0.575", 31: "0.717", 30: "0.673", 13: "-0.063", 15: "0.056", 18: "0.186", 23: "-0.284", 26: "0.524", 263: "0.513", 71: "1.414", 53: "0.863", 51: "0.717", 21: "0.186", 11: "-0.171", 83: "1.026" },
+            "RobustScaler": { 7: "-0.313", 34: "0.863", 10: "-0.171", 9: "-0.216", 108: "4.090", 47: "1.414", 512: "21.563", 5: "-0.409", 8: "-0.277", 14: "0.000", 55: "1.775", 27: "0.575", 31: "0.717", 30: "0.673", 13: "-0.063", 15: "0.056", 18: "0.186", 23: "-0.284", 26: "0.524", 263: "0.513", 71: "1.414", 53: "0.863", 51: "0.717", 21: "0.186", 11: "-0.171", 83: "1.026" },
+            "MinMaxScaler": { 93: "0.182", 13: "0.026", 14: "0.028", 8: "0.016", 7: "0.014", 26: "0.051", 146: "0.286", 0: "0.000", 63: "0.124", 30: "0.059", 7: "0.015", 83: "0.163", 52: "0.103", 23: "0.045", 11: "0.022", 32: "0.063", 39: "0.077", 263: "0.513", 71: "0.139", 53: "0.103", 51: "0.101", 21: "0.041" }
+          };
+
+          const stats = {
+            Age: { mean: 28.0, std: 17.873, min: 0.42, max: 80.0, median: 28.0, iqr: 17.873 },
+            Fare: { mean: 14.2, std: 23.0, min: 0.0, max: 512.32, median: 14.2, iqr: 23.0 }
+          };
+
+          const getScale = (val, feature, method, mapping) => {
+            const key = Math.floor(val);
+            if (mapping[key]) return mapping[key];
+
+            const s = stats[feature];
+            if (method === "StandardScaler") return ((val - s.mean) / s.std).toFixed(3);
+            if (method === "MinMaxScaler") return ((val - s.min) / (s.max - s.min)).toFixed(3);
+            if (method === "RobustScaler") return ((val - s.median) / s.iqr).toFixed(3);
+            return val.toFixed(3);
+          };
+
+          const processedRows = [
+            { id: 1, sur: 0, pclass: 2, name: "Braund, Mr. Owen Harris", sex: 1, age: 22, sibsp: 1, parch: 0, ticket: "A/5 21171", fare: 7.25, emb: ["False", "False", "True"], cab: ["False", "True", "False", "False", "False", "False", "False", "False"] },
+            { id: 2, sur: 1, pclass: 0, name: "Cumings, Mrs. John Bradley (Florence Briggs Thayer)", sex: 0, age: 38, sibsp: 1, parch: 0, ticket: "PC 17599", fare: 71.28, emb: ["True", "False", "False"], cab: ["False", "False", "True", "False", "False", "False", "False", "False"] },
+            { id: 3, sur: 1, pclass: 2, name: "Heikkinen, Miss. Laina", sex: 0, age: 26, sibsp: 0, parch: 0, ticket: "STON/O2. 3101282", fare: 7.92, emb: ["False", "False", "True"], cab: ["False", "True", "False", "False", "False", "False", "False", "False"] },
+            { id: 4, sur: 1, pclass: 0, name: "Futrelle, Mrs. Jacques Heath (Lily May Peel)", sex: 0, age: 35, sibsp: 1, parch: 0, ticket: "113803", fare: 53.1, emb: ["False", "False", "True"], cab: ["False", "False", "True", "False", "False", "False", "False", "False"] },
+            { id: 5, sur: 0, pclass: 2, name: "Allen, Mr. William Henry", sex: 1, age: 35, sibsp: 0, parch: 0, ticket: "373450", fare: 8.05, emb: ["False", "False", "True"], cab: ["False", "True", "False", "False", "False", "False", "False", "False"] },
+            { id: 6, sur: 0, pclass: 2, name: "Moran, Mr. James", sex: 1, age: ageValue, sibsp: 0, parch: 0, ticket: "330877", fare: 8.45, emb: ["False", "True", "False"], cab: ["False", "True", "False", "False", "False", "False", "False", "False"] },
+            { id: 7, sur: 0, pclass: 0, name: "McCarthy, Mr. Timothy J", sex: 1, age: 54, sibsp: 0, parch: 0, ticket: "17463", fare: 51.86, emb: ["False", "False", "True"], cab: ["False", "False", "False", "False", "True", "False", "False", "False"] },
+            { id: 8, sur: 0, pclass: 2, name: "Palsson, Master. Gosta Leonard", sex: 1, age: 2, sibsp: 3, parch: 1, ticket: "349909", fare: 21.07, emb: ["False", "False", "True"], cab: ["False", "True", "False", "False", "False", "False", "False", "False"] },
+            { id: 9, sur: 1, pclass: 2, name: "Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)", sex: 0, age: 27, sibsp: 0, parch: 2, ticket: "347742", fare: 11.13, emb: ["False", "False", "True"], cab: ["False", "True", "False", "False", "False", "False", "False", "False"] },
+            { id: 10, sur: 1, pclass: 1, name: "Nasser, Mrs. Nicholas (Adele Achem)", sex: 0, age: 14, sibsp: 1, parch: 0, ticket: "237736", fare: 30.07, emb: ["True", "False", "False"], cab: ["False", "True", "False", "False", "False", "False", "False", "False"] }
+          ];
+
+          let tbodyHTML = "";
+          processedRows.forEach((r, i) => {
+            const bg = i % 2 === 0 ? 'background:#f1faf3;' : '';
+            const scaledAge = getScale(r.age, "Age", ageScaler, ageMappings[ageScaler]);
+            const scaledFare = getScale(r.fare, "Fare", fareScaler, fareMappings[fareScaler]);
+
+            tbodyHTML += `
+              <tr style="${bg}">
+                <td style="padding: 4px 10px;">${r.id}</td>
+                <td style="padding: 4px 10px;">${r.sur}</td>
+                <td style="padding: 4px 10px;">${r.pclass}</td>
+                <td style="padding: 4px 10px;">${r.name}</td>
+                <td style="padding: 4px 10px;">${r.sex}</td>
+                <td style="padding: 4px 10px;">${r.age}</td>
+                <td style="padding: 4px 10px;">${r.sibsp}</td>
+                <td style="padding: 4px 10px;">${r.parch}</td>
+                <td style="padding: 4px 10px;">${r.ticket}</td>
+                <td style="padding: 4px 10px;">${r.fare.toFixed(4)}</td>
+                <td style="padding: 4px 10px;">${r.emb[0]}</td>
+                <td style="padding: 4px 10px;">${r.emb[1]}</td>
+                <td style="padding: 4px 10px;">${r.emb[2]}</td>
+                <td style="padding: 4px 10px;">${r.cab[0]}</td>
+                <td style="padding: 4px 10px;">${r.cab[1]}</td>
+                <td style="padding: 4px 10px;">${r.cab[2]}</td>
+                <td style="padding: 4px 10px;">${r.cab[3]}</td>
+                <td style="padding: 4px 10px;">${r.cab[4]}</td>
+                <td style="padding: 4px 10px;">${r.cab[5]}</td>
+                <td style="padding: 4px 10px;">${r.cab[6]}</td>
+                <td style="padding: 4px 10px;">${r.cab[7]}</td>
+                <td style="padding: 4px 10px;">${scaledAge}</td>
+                <td style="padding: 4px 10px;">${scaledFare}</td>
+              </tr>`;
+          });
+
+          return `<div class="output-text" style="font-family: monospace; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Raw Dataset vs Processed Dataset (first 10 samples)</div>
         <div style="display:flex; gap:40px; align-items:flex-start; font-family: sans-serif; font-size: 12px;">
             <div style="background:#ffe5b4; padding:15px; border-radius:4px; width:45%; max-width: 50%;">
                 <h3 style="text-align:center; margin-top: 0; margin-bottom: 10px; font-size: 16px;">Raw Dataset</h3>
@@ -1557,45 +1642,18 @@ compare_datasets()`,
                     <table style="width: 100%; border-collapse: collapse; text-align: right; background: white;">
                         <thead>
                             <tr style="border-bottom: 1px solid #aaa;">
-                                <th style="padding: 4px 10px;">PassengerId</th><th style="padding: 4px 10px;">Survived</th><th style="padding: 4px 10px;">Pclass</th><th style="padding: 4px 10px;">Name</th><th style="padding: 4px 10px;">Sex</th><th style="padding: 4px 10px;">Age</th><th style="padding: 4px 10px;">SibSp</th><th style="padding: 4px 10px;">Parch</th><th style="padding: 4px 10px;">Ticket</th><th style="padding: 4px 10px;">Fare</th><th style="padding: 4px 10px;">Embarked_C</th><th style="padding: 4px 10px;">Embarked_Q</th><th style="padding: 4px 10px;">Embarked_S</th><th style="padding: 4px 10px;">Cabin_A</th><th style="padding: 4px 10px;">Cabin_B</th><th style="padding: 4px 10px;">Cabin_C</th><th style="padding: 4px 10px;">Cabin_D</th><th style="padding: 4px 10px;">Cabin_E</th><th style="padding: 4px 10px;">Cabin_F</th><th style="padding: 4px 10px;">Cabin_G</th><th style="padding: 4px 10px;">Cabin_T</th><th style="padding: 4px 10px;">Scaled_Age</th><th style="padding: 4px 10px;">Scaled_Fare</th>
+                                <th style="padding: 4px 10px;">PassengerId</th><th style="padding: 4px 10px;">Survived</th><th style="padding: 4px 10px;">Pclass</th><th style="padding: 4px 10px;">Name</th><th style="padding: 4px 10px;">Sex</th><th style="padding: 4px 10px;">Age (${ageMethod})</th><th style="padding: 4px 10px;">SibSp</th><th style="padding: 4px 10px;">Parch</th><th style="padding: 4px 10px;">Ticket</th><th style="padding: 4px 10px;">Fare</th><th style="padding: 4px 10px;">Embarked_C</th><th style="padding: 4px 10px;">Embarked_Q</th><th style="padding: 4px 10px;">Embarked_S</th><th style="padding: 4px 10px;">Cabin_A</th><th style="padding: 4px 10px;">Cabin_B</th><th style="padding: 4px 10px;">Cabin_C</th><th style="padding: 4px 10px;">Cabin_D</th><th style="padding: 4px 10px;">Cabin_E</th><th style="padding: 4px 10px;">Cabin_F</th><th style="padding: 4px 10px;">Cabin_G</th><th style="padding: 10px;">Cabin_T</th><th style="padding: 4px 10px;">${ageScaler}_Age</th><th style="padding: 4px 10px;">${fareScaler}_Fare</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr style="background:#f1faf3;">
-                                <td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">2</td><td style="padding: 4px 10px;">Braund, Mr. Owen Harris</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">22</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">A/5 21171</td><td style="padding: 4px 10px;">7.2500</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">0.271174</td><td style="padding: 4px 10px;">0.014151</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 4px 10px;">2</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">Cumings, Mrs. John Bradley (Florence Briggs Thayer)</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">38</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">PC 17599</td><td style="padding: 4px 10px;">71.2833</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">0.472229</td><td style="padding: 4px 10px;">0.139136</td>
-                            </tr>
-                            <tr style="background:#f1faf3;">
-                                <td style="padding: 4px 10px;">3</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">2</td><td style="padding: 4px 10px;">Heikkinen, Miss. Laina</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">26</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">STON/O2. 3101282</td><td style="padding: 4px 10px;">7.9250</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">0.321438</td><td style="padding: 4px 10px;">0.015469</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 4px 10px;">4</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">Futrelle, Mrs. Jacques Heath (Lily May Peel)</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">35</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">113803</td><td style="padding: 4px 10px;">53.1000</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">0.434531</td><td style="padding: 4px 10px;">0.103644</td>
-                            </tr>
-                            <tr style="background:#f1faf3;">
-                                <td style="padding: 4px 10px;">5</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">2</td><td style="padding: 4px 10px;">Allen, Mr. William Henry</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">35</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">373450</td><td style="padding: 4px 10px;">8.0500</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">0.434531</td><td style="padding: 4px 10px;">0.015713</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 4px 10px;">6</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">2</td><td style="padding: 4px 10px;">Moran, Mr. James</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">&lt;NA&gt;</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">330877</td><td style="padding: 4px 10px;">8.4583</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">NaN</td><td style="padding: 4px 10px;">0.016510</td>
-                            </tr>
-                            <tr style="background:#f1faf3;">
-                                <td style="padding: 4px 10px;">7</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">McCarthy, Mr. Timothy J</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">54</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">17463</td><td style="padding: 4px 10px;">51.8625</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">0.673285</td><td style="padding: 4px 10px;">0.101229</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 4px 10px;">8</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">2</td><td style="padding: 4px 10px;">Palsson, Master. Gosta Leonard</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">2</td><td style="padding: 4px 10px;">3</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">349909</td><td style="padding: 4px 10px;">21.0750</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">0.019854</td><td style="padding: 4px 10px;">0.041136</td>
-                            </tr>
-                            <tr style="background:#f1faf3;">
-                                <td style="padding: 4px 10px;">9</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">2</td><td style="padding: 4px 10px;">Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">27</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">2</td><td style="padding: 4px 10px;">347742</td><td style="padding: 4px 10px;">11.1333</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">0.334004</td><td style="padding: 4px 10px;">0.021731</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 4px 10px;">10</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">Nasser, Mrs. Nicholas (Adele Achem)</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">14</td><td style="padding: 4px 10px;">1</td><td style="padding: 4px 10px;">0</td><td style="padding: 4px 10px;">237736</td><td style="padding: 4px 10px;">30.0708</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">True</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">False</td><td style="padding: 4px 10px;">0.170646</td><td style="padding: 4px 10px;">0.058694</td>
-                            </tr>
+                            ${tbodyHTML}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>`
+        }
+
 
       }
 
@@ -1605,6 +1663,9 @@ compare_datasets()`,
 
 // State Management
 let hasCompletedOnce = sessionStorage.getItem('dp_completed') === 'true';
+
+// Global Simulation State for dynamic updates
+window.selectedImputation = { method: "Mean", value: 30 };
 
 let STATE = {
   stepIndex: 0,
@@ -2314,6 +2375,9 @@ window.updateSimPreview = function () {
   if (method === "Median") value = 28;
   if (method === "Mode") value = 24;
   if (method === "Constant") value = parseInt(document.getElementById("simConstantInput").value) || 0;
+
+  // Store selection for final table
+  window.selectedImputation = { method: label, value: value };
 
   const previewArea = document.getElementById("simPreviewArea");
   if (!previewArea) return;
