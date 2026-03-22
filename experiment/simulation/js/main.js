@@ -16,11 +16,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder, MinMaxScaler, RobustScaler, OrdinalEncoder
 from sklearn.impute import SimpleImputer
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-from sklearn.linear_model import LogisticRegression
+
 
 import ipywidgets as widgets
 from IPython.display import display
@@ -2521,10 +2519,10 @@ window.updateEncodingPreview = function () {
             One-Hot Encoding creates separate binary columns for each category.<br><br>`;
 
     if (feature === "Embarked") {
-      textHTML += `For 'Embarked', passengers boarded from four ports:<br>
-            C (Cherbourg), Q (Queenstown), S (Southampton), and E (Eastport).<br><br>
-            Therefore four columns are created:<br>
-            Embarked_C, Embarked_Q, Embarked_S, Embarked_E.<br><br>
+      textHTML += `For 'Embarked', passengers boarded from three ports:<br>
+            C (Cherbourg), Q (Queenstown), and S (Southampton).<br><br>
+            Therefore three columns are created:<br>
+            Embarked_C, Embarked_Q, Embarked_S.<br><br>
             Each row contains 1 in the column representing the category<br>
             and 0 in the remaining columns.`;
     } else if (feature === "Cabin" || !feature) {
@@ -2558,11 +2556,11 @@ window.updateEncodingPreview = function () {
     afterCols = ["Sex"];
     afterData = isEncoded ? [[1], [0], [0], [0], [1]] : [[""], [""], [""], [""], [""]];
   } else if (feature === "Embarked") {
-    beforeData = ["S", "C", "E", "S", "S"];
-    afterCols = ["Embarked_C", "Embarked_Q", "Embarked_S", "Embarked_E"];
+    beforeData = ["S", "C", "S", "S", "S"];
+    afterCols = ["Embarked_C", "Embarked_Q", "Embarked_S"];
     afterData = isEncoded ?
-      [["False", "False", "True", "False"], ["True", "False", "False", "False"], ["False", "False", "False", "True"], ["False", "False", "True", "False"], ["False", "False", "True", "False"]] :
-      [Array(4).fill(""), Array(4).fill(""), Array(4).fill(""), Array(4).fill(""), Array(4).fill("")];
+      [["False", "False", "True"], ["True", "False", "False"], ["False", "False", "True"], ["False", "False", "True"], ["False", "False", "True"]] :
+      [Array(3).fill(""), Array(3).fill(""), Array(3).fill(""), Array(3).fill(""), Array(3).fill("")];
   } else if (feature === "Cabin") {
     beforeData = ["B", "C", "D", "C", "E"];
     afterCols = ["Cabin_A", "Cabin_B", "Cabin_C", "Cabin_D", "Cabin_E", "Cabin_F", "Cabin_G", "Cabin_T"];
@@ -2785,7 +2783,7 @@ window.updateOutlierPreview = function () {
   let method = mSelect.value;
   let feature = fSelect.value;
 
-  let dataPoints = feature === "Age" ? 714 : 891;
+  let dataPoints = feature === "Age" ? 891 : 891;
   let outCount = 0;
   if (feature === "Age" && method === "IQR") outCount = 1;
   else if (feature === "Age" && method === "Z-Score") outCount = 2;
@@ -2862,7 +2860,7 @@ window.updateOutlierPreview = function () {
   let method = mSelect.value;
   let feature = fSelect.value;
 
-  let dataPoints = feature === "Age" ? 714 : 891;
+  let dataPoints = feature === "Age" ? 891 : 891;
   let outCount = 0;
   if (feature === "Age" && method === "IQR") outCount = 1;
   else if (feature === "Age" && method === "Z-Score") outCount = 2;
