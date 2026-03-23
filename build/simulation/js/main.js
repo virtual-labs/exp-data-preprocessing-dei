@@ -2448,7 +2448,7 @@ window.updateCatSimPreview = function () {
     Missing values in Embarked: ${embarkedMissingCount}<br>
     Missing values in Cabin: ${cabinMissingCount}<br><br>
     Most frequent value in Embarked: S<br>
-    Most frequent value in Cabin: B96 B98<br><br>
+    Most frequent value in Cabin: B96<br><br>
     Concept Explanation:<br><br>
     Categorical missing values are commonly filled using the<br>
     most frequent category (also called the mode).<br><br>
@@ -2471,12 +2471,12 @@ window.updateCatSimPreview = function () {
     <table style="width: auto; background-color: transparent; text-align: right; font-family: monospace; font-size: 13px; border-collapse: collapse; margin-left: 20px;">
       <thead><tr style="border-bottom: 1px solid #ccc; height: 30px;"><th style="padding: 0 15px;">Before_Cabin</th><th style="padding: 0 15px;">After_Cabin</th></tr></thead>
       <tbody>
-        <tr style="background:#f2f2f2; height: 25px;"><td style="padding: 0 15px;">NaN</td><td style="padding: 0 15px;">${cabinApplied ? 'B96 B98' : ''}</td></tr>
-        <tr style="height: 25px;"><td style="padding: 0 15px;">NaN</td><td style="padding: 0 15px;">${cabinApplied ? 'B96 B98' : ''}</td></tr>
+        <tr style="background:#f2f2f2; height: 25px;"><td style="padding: 0 15px;">NaN</td><td style="padding: 0 15px;">${cabinApplied ? 'B96' : ''}</td></tr>
+        <tr style="height: 25px;"><td style="padding: 0 15px;">NaN</td><td style="padding: 0 15px;">${cabinApplied ? 'B96' : ''}</td></tr>
         <tr style="background:#f2f2f2; height: 25px;"><td style="padding: 0 15px;">E36</td><td style="padding: 0 15px;">${cabinApplied ? 'E36' : ''}</td></tr>
-        <tr style="height: 25px;"><td style="padding: 0 15px;">NaN</td><td style="padding: 0 15px;">${cabinApplied ? 'B96 B98' : ''}</td></tr>
+        <tr style="height: 25px;"><td style="padding: 0 15px;">NaN</td><td style="padding: 0 15px;">${cabinApplied ? 'B96' : ''}</td></tr>
         <tr style="background:#f2f2f2; height: 25px;"><td style="padding: 0 15px;">F33</td><td style="padding: 0 15px;">${cabinApplied ? 'F33' : ''}</td></tr>
-        <tr style="height: 25px;"><td style="padding: 0 15px;">NaN</td><td style="padding: 0 15px;">${cabinApplied ? 'B96 B98' : ''}</td></tr>
+        <tr style="height: 25px;"><td style="padding: 0 15px;">NaN</td><td style="padding: 0 15px;">${cabinApplied ? 'B96' : ''}</td></tr>
       </tbody>
     </table>
   </div>
