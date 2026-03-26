@@ -362,28 +362,28 @@
           Several statistical imputation techniques are commonly used to replace missing numerical values.</p>
           <p><strong>Mean Imputation</strong> replaces missing values with the average value of the feature. If a numerical attribute X contains missing values, the mean value is calculated as:</p>
           <div align="center" style="margin: 20px 0;">
-              <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
-                  <i>x̄</i> = 
-                  <div style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 3px;">
-                      <div style="border-bottom: 1.5px solid black; padding: 2px 8px;">1</div>
-                      <div style="padding: 2px 8px;"><i>n</i></div>
+              <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.25em;">
+                  <span style="text-decoration: overline;"><i>x</i></span> = 
+                  <div style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 5px;">
+                      <div style="border-bottom: 1.5px solid black; padding: 0 5px;">1</div>
+                      <div><i>n</i></div>
                   </div>
-                  <span style="font-size: 1.5em; vertical-align: middle;">Σ</span>
-                  <div style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 3px;">
-                      <div style="font-size: 0.7em;"><i>n</i></div>
-                      <div style="font-size: 0.7em;"><i>i</i>=1</div>
+                  <div style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1;">
+                      <div style="font-size: 0.75em;"><i>n</i></div>
+                      <div style="font-size: 1.7em; margin-top: -2px; margin-bottom: -2px;">Σ</div>
+                      <div style="font-size: 0.75em;"><i>i</i>=1</div>
                   </div>
                   <i>x<sub>i</sub></i>
               </span>
           </div>
           
-          <p>The missing values are then replaced with <em>x̄</em>.</p>
+          <p>The missing values are then replaced with <span style="text-decoration: overline;"><i>x</i></span>.</p>
           <p><strong>Median Imputation</strong> replaces missing values with the median of the feature, which represents the middle value when the data is sorted. This approach is particularly useful when the data distribution is skewed or contains outliers.</p>
           <p><strong>Mode Imputation</strong> replaces missing values with the most frequently occurring value in the feature. Although more common for categorical attributes, it can also be used for numerical variables with repeated values.</p>
           <p><strong>Constant Imputation</strong> replaces missing values with a fixed constant such as zero or another predefined value. This approach is sometimes used when missing values need to be represented explicitly.</p>
           <p>Handling numerical missing values ensures that machine learning algorithms receive complete data without introducing bias or distortion in the dataset.</p>
           <h3 id="3-handling-missing-values-categorical-features">3. Handling Missing Values (Categorical Features)</h3>
-          <p>Categorical attributes represent qualitative information such as labels, names, or categories. Missing values in categorical variables are commonly handled using <strong>most frequent value imputation</strong>, also known as mode imputation.</p>
+          <p>Categorical attributes represent qualitative information such as labels, names, or categories. Missing values in categorical variables are commonly handled using most frequent value imputation, also known as mode imputation.</p>
           <p>In this technique, the missing values are replaced with the category that appears most frequently in the dataset. This method helps preserve the distribution of categorical values while maintaining the consistency of the dataset.</p>
           <p>For example, if the most frequent value in the “Embarked” column is “S”, all missing entries in that column can be replaced with “S”. This approach ensures that the dataset remains logically consistent without introducing new artificial categories.</p>
           <h3 id="4-encoding-categorical-features">4. Encoding Categorical Features</h3>
@@ -471,11 +471,11 @@
               </span>
           </div>
           
-          <p>Where:</p>
+          <p>where,</p>
           <ul>
-          <li><em>X</em> = original value</li>
-          <li><em>X<sub>min</sub></em> = minimum value of the feature</li>
-          <li><em>X<sub>max</sub></em> = maximum value of the feature</li>
+          <li><em>X</em> : original value</li>
+          <li><em>X<sub>min</sub></em> : minimum value of the feature</li>
+          <li><em>X<sub>max</sub></em> : maximum value of the feature</li>
           </ul>
           <p>This method preserves the relationships among original data values but may be sensitive to outliers.</p>
           <h4 id="standard-scaling-standardization">Standard Scaling (Standardization)</h4>
@@ -491,11 +491,11 @@
               </span>
           </div>
           
-          <p>Where:</p>
+          <p>where:</p>
           <ul>
-          <li><em>X</em> = original value</li>
-          <li><em>μ</em> = mean of the feature</li>
-          <li><em>σ</em> = standard deviation</li>
+          <li><em>X</em> : original value</li>
+          <li><em>μ</em> : mean of the feature</li>
+          <li><em>σ</em> : standard deviation</li>
           </ul>
           <p>Standardization is widely used when data follows an approximately normal distribution.</p>
           <h4 id="robust-scaling">Robust Scaling</h4>
@@ -511,10 +511,10 @@
               </span>
           </div>
           
-          <p>Where:</p>
+          <p>where,</p>
           <div align="center" style="margin: 15px 0;">
               <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
-                  IQR = Q3 − Q1
+                  IQR = <i>Q</i><sub>3</sub> − <i>Q</i><sub>1</sub>
               </span>
           </div>
           
@@ -535,36 +535,36 @@
               </span>
           </div>
           
-          <p>Where:</p>
+          <p>where:</p>
           <ul>
-          <li><em>X</em> = observed value</li>
-          <li><em>μ</em> = mean of the dataset</li>
-          <li><em>σ</em> = standard deviation</li>
+          <li><em>X</em> : observed value</li>
+          <li><em>μ</em> : mean of the dataset</li>
+          <li><em>σ</em> : standard deviation</li>
           </ul>
           <p>Typically, any value with a Z-Score greater than ±3 is considered an outlier.</p>
           <h4 id="interquartile-range-iqr-method">Interquartile Range (IQR) Method</h4>
           <p>The IQR method is based on the concept of quartiles, which divide the dataset into four equal parts.</p>
           <ul>
-          <li><strong>Q1 (First Quartile)</strong> → 25th percentile</li>
-          <li><strong>Q2 (Median)</strong> → 50th percentile</li>
-          <li><strong>Q3 (Third Quartile)</strong> → 75th percentile</li>
+          <li><strong><i>Q</i><sub>1</sub> (First Quartile)</strong> → 25th percentile</li>
+          <li><strong><i>Q</i><sub>2</sub> (Median)</strong> → 50th percentile</li>
+          <li><strong><i>Q</i><sub>3</sub> (Third Quartile)</strong> → 75th percentile</li>
           </ul>
           <p>The interquartile range is defined as:</p>
           <div align="center" style="margin: 15px 0;">
               <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
-                  IQR = Q3 − Q1
+                  IQR = <i>Q</i><sub>3</sub> − <i>Q</i><sub>1</sub>
               </span>
           </div>
           
           <p>Outliers are identified using the following boundaries:</p>
           <div align="center" style="margin: 15px 0;">
               <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
-                  Lower Bound = Q1 − 1.5 × IQR
+                  Lower Bound = <i>Q</i><sub>1</sub> − 1.5 × IQR
               </span>
           </div>
           <div align="center" style="margin: 15px 0;">
               <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
-                  Upper Bound = Q3 + 1.5 × IQR
+                  Upper Bound = <i>Q</i><sub>3</sub> + 1.5 × IQR
               </span>
           </div>
           

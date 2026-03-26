@@ -10,22 +10,22 @@ Several statistical imputation techniques are commonly used to replace missing n
 **Mean Imputation** replaces missing values with the average value of the feature. If a numerical attribute X contains missing values, the mean value is calculated as:
 
 <div align="center" style="margin: 20px 0;">
-    <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
-        <i>x̄</i> = 
-        <div style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 3px;">
-            <div style="border-bottom: 1.5px solid black; padding: 2px 8px;">1</div>
-            <div style="padding: 2px 8px;"><i>n</i></div>
+    <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.25em;">
+        <span style="text-decoration: overline;"><i>x</i></span> = 
+        <div style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 5px;">
+            <div style="border-bottom: 1.5px solid black; padding: 0 5px;">1</div>
+            <div><i>n</i></div>
         </div>
-        <span style="font-size: 1.5em; vertical-align: middle;">Σ</span>
-        <div style="display: inline-block; vertical-align: middle; text-align: center; margin: 0 3px;">
-            <div style="font-size: 0.7em;"><i>n</i></div>
-            <div style="font-size: 0.7em;"><i>i</i>=1</div>
+        <div style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1;">
+            <div style="font-size: 0.75em;"><i>n</i></div>
+            <div style="font-size: 1.7em; margin-top: -2px; margin-bottom: -2px;">Σ</div>
+            <div style="font-size: 0.75em;"><i>i</i>=1</div>
         </div>
         <i>x<sub>i</sub></i>
     </span>
 </div>
 
-The missing values are then replaced with *x̄*.
+The missing values are then replaced with <span style="text-decoration: overline;"><i>x</i></span>.
 
 **Median Imputation** replaces missing values with the median of the feature, which represents the middle value when the data is sorted. This approach is particularly useful when the data distribution is skewed or contains outliers.
 
@@ -36,7 +36,7 @@ The missing values are then replaced with *x̄*.
 Handling numerical missing values ensures that machine learning algorithms receive complete data without introducing bias or distortion in the dataset.
 
 ### 3. Handling Missing Values (Categorical Features)
-Categorical attributes represent qualitative information such as labels, names, or categories. Missing values in categorical variables are commonly handled using **most frequent value imputation**, also known as mode imputation.
+Categorical attributes represent qualitative information such as labels, names, or categories. Missing values in categorical variables are commonly handled using most frequent value imputation, also known as mode imputation.
 
 In this technique, the missing values are replaced with the category that appears most frequently in the dataset. This method helps preserve the distribution of categorical values while maintaining the consistency of the dataset.
 
@@ -95,10 +95,10 @@ Min-Max scaling rescales data into a fixed range, typically between 0 and 1. The
     </span>
 </div>
 
-Where:
-- *X* = original value
-- *X<sub>min</sub>* = minimum value of the feature
-- *X<sub>max</sub>* = maximum value of the feature
+where,
+- *X* : original value
+- *X<sub>min</sub>* : minimum value of the feature
+- *X<sub>max</sub>* : maximum value of the feature
 
 This method preserves the relationships among original data values but may be sensitive to outliers.
 
@@ -116,10 +116,10 @@ The transformation is given by:
     </span>
 </div>
 
-Where:
-- *X* = original value
-- *μ* = mean of the feature
-- *σ* = standard deviation
+where:
+- *X* : original value
+- *μ* : mean of the feature
+- *σ* : standard deviation
 
 Standardization is widely used when data follows an approximately normal distribution.
 
@@ -137,10 +137,10 @@ The transformation is defined as:
     </span>
 </div>
 
-Where:
+where,
 <div align="center" style="margin: 15px 0;">
     <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
-        IQR = Q3 − Q1
+        IQR = <i>Q</i><sub>3</sub> − <i>Q</i><sub>1</sub>
     </span>
 </div>
 
@@ -164,36 +164,36 @@ The formula for the Z-Score is:
     </span>
 </div>
 
-Where:
-- *X* = observed value
-- *μ* = mean of the dataset
-- *σ* = standard deviation
+where:
+- *X* : observed value
+- *μ* : mean of the dataset
+- *σ* : standard deviation
 
 Typically, any value with a Z-Score greater than ±3 is considered an outlier.
 
 #### Interquartile Range (IQR) Method
 The IQR method is based on the concept of quartiles, which divide the dataset into four equal parts.
-- **Q1 (First Quartile)** → 25th percentile
-- **Q2 (Median)** → 50th percentile
-- **Q3 (Third Quartile)** → 75th percentile
+- **<i>Q</i><sub>1</sub> (First Quartile)** → 25th percentile
+- **<i>Q</i><sub>2</sub> (Median)** → 50th percentile
+- **<i>Q</i><sub>3</sub> (Third Quartile)** → 75th percentile
 
 The interquartile range is defined as:
 
 <div align="center" style="margin: 15px 0;">
     <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
-        IQR = Q3 − Q1
+        IQR = <i>Q</i><sub>3</sub> − <i>Q</i><sub>1</sub>
     </span>
 </div>
 
 Outliers are identified using the following boundaries:
 <div align="center" style="margin: 15px 0;">
     <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
-        Lower Bound = Q1 − 1.5 × IQR
+        Lower Bound = <i>Q</i><sub>1</sub> − 1.5 × IQR
     </span>
 </div>
 <div align="center" style="margin: 15px 0;">
     <span style="font-family: 'Times New Roman', 'Georgia', serif; font-size: 1.2em;">
-        Upper Bound = Q3 + 1.5 × IQR
+        Upper Bound = <i>Q</i><sub>3</sub> + 1.5 × IQR
     </span>
 </div>
 
